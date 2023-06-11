@@ -1,23 +1,17 @@
 const http=require('http');
+const URL=require('url');
 
 const server=http.createServer(function (req,res) {
-    if(req.url=="/"){
-        res.writeHead(200,{'Content-Type':'text/html'})
-        res.write('<h1>This is Home Page</h1>')
-        res.end();
+    const myURL="http://rabbil.com/blog.html?year=2020&month=july";
+    const myURLObj= URL.parse(myURL,true);
 
-    }
-    else if(req.url=="/about"){
-        res.writeHead(200,{'Content-Type':'text/html'})
-        res.write('<h1>This is About Page</h1>')
-        res.end();
-    }
+    const myHostName=myURLObj.host;
+    const myPathName=myURLObj.pathname;
+    const mySearchName=myURLObj.search;
 
-    else if(req.url=="/contact"){
-        res.writeHead(200,{'Content-Type':'text/html'})
-        res.write('<h1>This is Contact Page</h1>')
-        res.end();
-    }
+    res.writeHead(200,{'Content-Type':'text/html'})
+    res.write(myHostName);
+    res.end();
 });
 
 server.listen(5050);
